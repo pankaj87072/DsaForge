@@ -17,5 +17,5 @@ def get_db():
         db.close()
 
 def create_tables():
-    from models import user, ai_connection, progress
+    from models import user, ai_connection, progress, validation
     Base.metadata.create_all(bind=engine)
