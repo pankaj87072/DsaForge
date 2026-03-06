@@ -22,12 +22,37 @@ function OnboardingRoute({ children }) {
 }
 
 function App() {
+  const hostname = window.location.hostname;
+
+  // LOGIC: If the URL is a validation subdomain (e.g., validate.yourdomain.com 
+  // or contains 'validate' in the railway subdomain), show ONLY the validation page.
+  // Otherwise, show the full application.
+  const isValidationSubdomain = hostname.includes('validate') && !hostname.includes('localhost');
+
+  if (isValidationSubdomain) {
+    return (
+      <BrowserRouter>
+        <Routes>
+          <Route path="*" element={<IdeaValidationPage />} />
+        </Routes>
+      </BrowserRouter>
+    )
+  }
+
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="*" element={<IdeaValidationPage />} />
-      </Routes>
-    </BrowserRouter>
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/validate" element={<IdeaValidationPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/onboarding" element={<OnboardingRoute><OnboardingPage /></OnboardingRoute>} />
+          <Route path="/dashboard" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />
+          <Route path="/practice/:level" element={<ProtectedRoute><PracticePage /></ProtectedRoute>} />
+          <Route path="*" element={<Navigate to="/login" replace />} />
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   )
 }
 
