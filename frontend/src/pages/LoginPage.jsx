@@ -90,6 +90,16 @@ export default function LoginPage() {
             <Link to="/register" className="text-forge-accent hover:underline">Create one</Link>
           </p>
         </div>
+
+        {/* Validation Link */}
+        <div className="mt-8 text-center animate-pulse">
+          <Link
+            to="/validate"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-forge-accent/30 text-xs font-mono text-forge-accent"
+          >
+            🚀 Exclusive Life-Time Offer → Validate Our Idea
+          </Link>
+        </div>
       </div>
     </div>
   )

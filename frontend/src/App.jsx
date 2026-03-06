@@ -5,6 +5,7 @@ import RegisterPage from './pages/RegisterPage'
 import OnboardingPage from './pages/OnboardingPage'
 import DashboardPage from './pages/DashboardPage'
 import PracticePage from './pages/PracticePage'
+import IdeaValidationPage from './pages/IdeaValidationPage'
 
 function ProtectedRoute({ children }) {
   const { user } = useAuth()
@@ -22,18 +23,11 @@ function OnboardingRoute({ children }) {
 
 function App() {
   return (
-    <AuthProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/onboarding" element={<OnboardingRoute><OnboardingPage /></OnboardingRoute>} />
-          <Route path="/dashboard" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />
-          <Route path="/practice/:level" element={<ProtectedRoute><PracticePage /></ProtectedRoute>} />
-          <Route path="*" element={<Navigate to="/login" replace />} />
-        </Routes>
-      </BrowserRouter>
-    </AuthProvider>
+    <BrowserRouter>
+      <Routes>
+        <Route path="*" element={<IdeaValidationPage />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 
